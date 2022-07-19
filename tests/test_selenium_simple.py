@@ -7,6 +7,7 @@ def test_search_example(selenium):
     # Open google search page:
     selenium.get('https://google.com')
 
+    time.sleep(3)
 
     # Find the field for search text input:
     search_input = selenium.find_element_by_name('q')
@@ -14,14 +15,15 @@ def test_search_example(selenium):
 
     # Enter the text for search:
     search_input.clear()
-    search_input.send_keys('first test')
+    search_input.send_keys('first test HENADZI Z')
 
+    time.sleep(3)
 
     # Click Search:
     search_button = selenium.find_element_by_name('btnK')
     search_button.submit()
 
-    time.sleep(5)  # just for demo purposes, do NOT repeat it on real projects!
+    time.sleep(10)  # just for demo purposes, do NOT repeat it on real projects!
 
     # Make the screenshot of browser window:
     selenium.save_screenshot('result.png')
