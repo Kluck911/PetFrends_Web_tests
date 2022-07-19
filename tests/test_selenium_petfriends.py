@@ -23,12 +23,12 @@ def test_petfriends(web_browser):
 
     # add password
     field_pass = web_browser.find_element_by_id("pass")
-    field_pass.clear()
+    field_pass.click()
     field_pass.send_keys("afwwfwaffaw")
 
     # click submit button
     btn_submit = web_browser.find_element_by_xpath("//button[@type='submit']")
-    btn_submit.click()
+    btn_submit.submit()
 
     time.sleep(10)  # just for demo purposes, do NOT repeat it on real projects!
 
