@@ -1,4 +1,4 @@
-# content of file conftest.py
+'''# content of file conftest.py
 
 import pytest
 import uuid
@@ -57,3 +57,4 @@ def web_browser(request, selenium):
 
         except:
             pass  # just ignore any errors here
+'''
