@@ -15,8 +15,11 @@ def testing():
     pytest.driver.find_element_by_id('pass').send_keys(user_passwd)
     # Нажимаем на кнопку входа в аккаунт
     pytest.driver.find_element_by_css_selector('button[type="submit"]').click()
+    # Проверяем, что мы оказались на главной странице
+    pytest.driver.find_element_by_css_selector('#navbarNav > ul > li:nth-child(1)')
     # Проверяем, что мы оказались на главной странице пользователя
-    assert pytest.driver.find_element_by_tag_name('h1').text == "PetFriends"
+
+    assert pytest.driver.find_element_by_tag_name('data-target').text == "#addPetsModal"
 
     yield
 
