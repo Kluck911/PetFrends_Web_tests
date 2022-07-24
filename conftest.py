@@ -3,7 +3,7 @@
 import pytest
 import uuid
 
-
+'''
 @pytest.fixture
 def chrome_options(chrome_options):
     chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"
@@ -17,7 +17,7 @@ def firefox_options(firefox_options):
     firefox_options.binary = "C:/Program Files/Mozilla Firefox/firefox.exe"
     firefox_options.add_argument('-foreground')
     firefox_options.set_preference('browser.anchor_color', '#FF0000')
-    return firefox_options
+    return firefox_options'''
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
