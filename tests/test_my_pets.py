@@ -1,8 +1,7 @@
 import pytest
+
 from selenium import webdriver
-
 from datetime import datetime
-
 from settings import user_email, user_passwd
 
 
@@ -47,6 +46,7 @@ def testing():
 
 
 def test_compare_quantity_of_pets():
+
     # Присутствуют все питомцы.
     # сравниваем кол-во питомцев в счетчике с кол-вом строк в таблице
 
@@ -61,22 +61,23 @@ def test_compare_quantity_of_pets():
 
 
 def test_foto_more_than_half():
+
     # Хотя бы у половины питомцев есть фото.
     # сравниваем кол-во пустых слотов под фото с кол-вом слотов с картинками
 
-    all_images_slots = pytest.driver.find_elements_by_xpath("//tbody/tr/th/img")
     amount_of_pic = 0
 
-    for i in range(len(all_images_slots)):
-        if all_images_slots[i].get_attribute('src') != '':
+    for i in range(len(elements_of_pics())):
+        if elements_of_pics()[i].get_attribute('src') != '':
             amount_of_pic += 1
 
-    empty_slots = len(all_images_slots) - amount_of_pic
+    empty_slots = len(elements_of_pics()) - amount_of_pic
 
     assert amount_of_pic >= empty_slots
 
 
 def test_all_pets_with_full_description():
+
     # У всех питомцев есть имя, возраст и порода.
     # Проверяем что строки имя и породы не пустые, строка возраста не пустая и число
 
@@ -87,6 +88,7 @@ def test_all_pets_with_full_description():
 
 
 def test_pets_have_different_names():
+
     # У всех питомцев разные имена.
     # проверяем что список питомцев с одинаковыми именами равен пустой строке
 
@@ -100,8 +102,10 @@ def test_pets_have_different_names():
 
 
 def test_some_pets_is_same():
+
     # В списке нет повторяющихся питомцев. (Сложное задание).
     # Сравниваем первого питомца с последующими и так далее
+
     for i in range(len(elements_of_names())):
         for j in range(i+1, len(elements_of_names())):
             if elements_of_names()[i].text == elements_of_names()[j].text and elements_of_breeds()[i].text\
