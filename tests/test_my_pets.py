@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------------
-#    Прииер
+#    Пример
     # images = pytest.driver.find_elements_by_xpath("//img")
     # names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
     # descriptions = pytest.driver.find_elements_by_xpath("//tbody/tr/td[2]")
@@ -12,6 +12,8 @@
 # --------------------------------------------------------------------------------
 import pytest
 from selenium import webdriver
+
+from datetime import datetime
 
 from settings import user_email, user_passwd
 
@@ -37,10 +39,23 @@ def testing():
     pytest.driver.quit()
 
 
+def test_compare_number_of_pets():
 
-def test_pets_value():
+    amount_of_pets = 0
+    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+    pets_element = pytest.driver.find_element_by_xpath("//div[@class='.col-sm-4 left']")
+    parts_element = pets_element.text.split("\n")
 
-    #names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
-    value = pytest.driver.find_element_by_xpath("//html/body/div[@class='task2 fill']/div[@class='task3 fill']/div[@class='.col-sm-4 left']")
-    print('\n')
-    print(value)
+    for s in str.split(parts_element[1]):
+        if s.isdigit():
+            amount_of_pets = int(s)
+
+    assert len(names) == amount_of_pets
+
+
+@pytest.fixture(autouse=True)
+def time_delta():
+    start_time = datetime.now()
+    yield
+    stop_time = datetime.now()
+    print(f'\nТест шел: {stop_time-start_time}')
