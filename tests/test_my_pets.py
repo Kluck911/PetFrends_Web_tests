@@ -59,6 +59,7 @@ def test_foto_more_than_half():
 
     # Хотя бы у половины питомцев есть фото.
     # сравниваем кол-во пустых слотов под фото с кол-вом слотов с картинками
+
     all_images_slots = pytest.driver.find_elements_by_xpath("//tbody/tr/th/img")
     amount_of_pic = 0
 
@@ -71,6 +72,25 @@ def test_foto_more_than_half():
     assert amount_of_pic >= empty_slots
 
 
+def test_all_pets_with_full_description():
+
+    # У всех питомцев есть имя, возраст и порода.
+    # Проверяем что строки имя и породы не пустые, строка возраста не пустая и число
+
+    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+    breed = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[2]")
+    age = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[3]")
+
+    for i in range(len(names)):
+        assert names[i].text != ''
+        assert breed[i].text != ''
+        assert age[i].text != '' and age[i].text.isdigit()
+
+def tests_pets_have_different_names():
+    # У всех питомцев разные имена.
+
+    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]").text
+    print(names)
 
 
 
