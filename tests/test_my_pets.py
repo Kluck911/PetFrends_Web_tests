@@ -39,10 +39,12 @@ def testing():
     pytest.driver.quit()
 
 
-def test_compare_number_of_pets():
+def test_compare_quantity_of_pets():
+    # Присутствуют все питомцы.
+    # сравниваем кол-во питомцев в счетчике с кол-вом строк в таблице
 
     amount_of_pets = 0
-    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+    amount_of_lines = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
     pets_element = pytest.driver.find_element_by_xpath("//div[@class='.col-sm-4 left']")
     parts_element = pets_element.text.split("\n")
 
@@ -50,7 +52,28 @@ def test_compare_number_of_pets():
         if s.isdigit():
             amount_of_pets = int(s)
 
-    assert len(names) == amount_of_pets
+    assert len(amount_of_lines) == amount_of_pets
+
+
+def test_foto_more_than_half():
+
+    # Хотя бы у половины питомцев есть фото.
+    # сравниваем кол-во пустых слотов под фото с кол-вом слотов с картинками
+    all_images_slots = pytest.driver.find_elements_by_xpath("//tbody/tr/th/img")
+    amount_of_pic = 0
+
+    for i in range(len(all_images_slots)):
+        if all_images_slots[i].get_attribute('src') != '':
+            amount_of_pic += 1
+
+    empty_slots = len(all_images_slots) - amount_of_pic
+
+    assert amount_of_pic >= empty_slots
+
+
+
+
+
 
 
 @pytest.fixture(autouse=True)
