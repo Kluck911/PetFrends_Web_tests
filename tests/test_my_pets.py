@@ -1,14 +1,14 @@
 # --------------------------------------------------------------------------------
 #    Пример
-    # images = pytest.driver.find_elements_by_xpath("//img")
-    # names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
-    # descriptions = pytest.driver.find_elements_by_xpath("//tbody/tr/td[2]")
+# images = pytest.driver.find_elements_by_xpath("//img")
+# names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+# descriptions = pytest.driver.find_elements_by_xpath("//tbody/tr/td[2]")
 
 
-    # for i in range(len(names)):
-        # assert images[i].get_attribute('src') != ''
-        # assert names[i].text != ''
-        # assert descriptions[i].text != ''
+# for i in range(len(names)):
+# assert images[i].get_attribute('src') != ''
+# assert names[i].text != ''
+# assert descriptions[i].text != ''
 # --------------------------------------------------------------------------------
 import pytest
 from selenium import webdriver
@@ -20,7 +20,6 @@ from settings import user_email, user_passwd
 
 @pytest.fixture(autouse=True)
 def testing():
-
     pytest.driver = webdriver.Chrome("E:\webdrivers\chromedriver.exe")
     # Переходим на страницу авторизации
     pytest.driver.get('http://petfriends.skillfactory.ru/login')
@@ -56,7 +55,6 @@ def test_compare_quantity_of_pets():
 
 
 def test_foto_more_than_half():
-
     # Хотя бы у половины питомцев есть фото.
     # сравниваем кол-во пустых слотов под фото с кол-вом слотов с картинками
 
@@ -73,7 +71,6 @@ def test_foto_more_than_half():
 
 
 def test_all_pets_with_full_description():
-
     # У всех питомцев есть имя, возраст и порода.
     # Проверяем что строки имя и породы не пустые, строка возраста не пустая и число
 
@@ -86,14 +83,34 @@ def test_all_pets_with_full_description():
         assert breed[i].text != ''
         assert age[i].text != '' and age[i].text.isdigit()
 
-def tests_pets_have_different_names():
+
+def test_pets_have_different_names():
     # У всех питомцев разные имена.
+    # проверяем что список питомцев с одинаковыми именами равен пустой строке
 
-    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]").text
-    print(names)
+    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+    list_names = [names[i].text for i in range(len(names))]
+    same_names = [list_names[i] for i in range(len(list_names)) if not i == list_names.index(list_names[i])]
+
+    if same_names:
+        raise Exception(f'Встречаются одинаковые имена:\n {same_names}')
+    else:
+        assert same_names == []
 
 
+def test_some_pets_is_same():
+    # В списке нет повторяющихся питомцев. (Сложное задание).
 
+    names = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+    breed = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[2]")
+    age = pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[3]")
+
+    for i in range(len(names)):
+        for j in range(i+1, len(names)):
+            if names[i].text == names[j].text and breed[i].text == breed[j].text and age[i].text == age[j].text:
+                raise Exception(f'Найдены одинаковые питомцы с индексами {i} и {j}')
+            else:
+                assert '' == ''
 
 
 @pytest.fixture(autouse=True)
@@ -101,4 +118,4 @@ def time_delta():
     start_time = datetime.now()
     yield
     stop_time = datetime.now()
-    print(f'\nТест шел: {stop_time-start_time}')
+    print(f'\nТест шел: {stop_time - start_time}')
