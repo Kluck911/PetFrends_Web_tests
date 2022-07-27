@@ -36,7 +36,7 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture
 def chromium_login(request):
     browser = webdriver.Chrome('./chromedriver.exe')
-    browser.set_window_size(1800, 1000)
+    browser.set_window_size(1024, 768)
     browser.get('http://petfriends.skillfactory.ru/login')
     myDynamicElement = browser.find_element_by_css_selector('button[type="submit"]')
 

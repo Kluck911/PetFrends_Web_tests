@@ -1,43 +1,51 @@
 import pytest
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 from settings import user_email, user_passwd
-
 
 @pytest.fixture(autouse=True)
 def testing():
     pytest.driver = webdriver.Chrome("chromedriver.exe")
     # Авторизуемся и переходим на страницу своих питомцев
     pytest.driver.get('http://petfriends.skillfactory.ru/login')
-    pytest.driver.find_element_by_id('email').send_keys(user_email)
-    pytest.driver.find_element_by_id('pass').send_keys(user_passwd)
-    pytest.driver.find_element_by_css_selector('button[type="submit"]').click()
-    pytest.driver.find_element_by_css_selector('#navbarNav > ul > li:nth-child(1)').click()
+    WebDriverWait(pytest.driver, 5).until(EC.visibility_of_element_located((By.ID, 'email'))).send_keys(user_email)
+    WebDriverWait(pytest.driver, 5).until(EC.visibility_of_element_located((By.ID, 'pass'))).send_keys(user_passwd)
+    WebDriverWait(pytest.driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,
+                                                                      'button[type="submit"]'))).click()
+    WebDriverWait(pytest.driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,
+                                                                      '#navbarNav > ul > li:nth-child(1)'))).click()
 
     yield
 
     pytest.driver.quit()
 
-
+# Элементы страницы с ожиданиями
 def elements_of_names():
-    return pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[1]")
+    return WebDriverWait(pytest.driver, 5).until(EC.presence_of_all_elements_located((By.XPATH,
+                                                                                      "//*[@id='all_my_pets']//td[1]")))
 
 
 def elements_of_breeds():
-    return pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[2]")
+    return WebDriverWait(pytest.driver, 5).until(EC.presence_of_all_elements_located((By.XPATH,
+                                                                                      "//*[@id='all_my_pets']//td[2]")))
 
 
 def elements_of_ages():
-    return pytest.driver.find_elements_by_xpath("//*[@id='all_my_pets']//td[3]")
+    return WebDriverWait(pytest.driver, 5).until(EC.presence_of_all_elements_located((By.XPATH,
+                                                                                      "//*[@id='all_my_pets']//td[3]")))
 
 
 def elements_of_pics():
-    return pytest.driver.find_elements_by_xpath("//tbody/tr/th/img")
+    return WebDriverWait(pytest.driver, 5).until(EC.presence_of_all_elements_located((By.XPATH, "//tbody/tr/th/img")))
 
 
 def user_info_element():
-    return pytest.driver.find_element_by_xpath("//div[@class='.col-sm-4 left']")
+    return WebDriverWait(pytest.driver, 5).until(EC.presence_of_element_located((By.XPATH,
+                                                                                 "//div[@class='.col-sm-4 left']")))
 
 
 def test_compare_quantity_of_pets():
@@ -105,7 +113,7 @@ def test_some_pets_is_same():
         for j in range(i+1, len(elements_of_names())):
             if elements_of_names()[i].text == elements_of_names()[j].text and elements_of_breeds()[i].text\
                     == elements_of_breeds()[j].text and elements_of_ages()[i].text == elements_of_ages()[j].text:
-                raise Exception(f'Найдены одинаковые питомцы с индексами {i} и {j}')
+                raise Exception(f'Найдено минимум два одинаковых питомца под номерами {i+1} и {j+1}')
             else:
                 assert '' == ''
 
