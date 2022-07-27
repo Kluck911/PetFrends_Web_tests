@@ -5,15 +5,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
-from settings import user_email, user_passwd
+from settings import my_user
 
 @pytest.fixture(autouse=True)
 def testing():
     pytest.driver = webdriver.Chrome("chromedriver.exe")
     # Авторизуемся и переходим на страницу своих питомцев
     pytest.driver.get('http://petfriends.skillfactory.ru/login')
-    WebDriverWait(pytest.driver, 5).until(EC.visibility_of_element_located((By.ID, 'email'))).send_keys(user_email)
-    WebDriverWait(pytest.driver, 5).until(EC.visibility_of_element_located((By.ID, 'pass'))).send_keys(user_passwd)
+    WebDriverWait(pytest.driver, 5).until(EC.visibility_of_element_located((By.ID, 'email'))).send_keys(my_user.login)
+    WebDriverWait(pytest.driver, 5).until(EC.visibility_of_element_located((By.ID, 'pass'))).send_keys(my_user.passwd)
     WebDriverWait(pytest.driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,
                                                                       'button[type="submit"]'))).click()
     WebDriverWait(pytest.driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR,
