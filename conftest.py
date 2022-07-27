@@ -8,10 +8,9 @@ from selenium import webdriver
 
 @pytest.fixture
 def chrome_options(chrome_options):
-
     chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"
     # chrome_options.add_extension('/path/to/extension.crx')
-    chrome_options.add_argument('--kiosk')
+    # chrome_options.add_argument('--kiosk')
     return chrome_options
 
 
@@ -39,6 +38,7 @@ def chromium_login(request):
     browser = webdriver.Chrome('./chromedriver.exe')
     browser.set_window_size(1800, 1000)
     browser.get('http://petfriends.skillfactory.ru/login')
+    myDynamicElement = browser.find_element_by_css_selector('button[type="submit"]')
 
     # Return browser instance to test case:
     yield browser
@@ -61,5 +61,3 @@ def chromium_login(request):
 
         except:
             pass  # just ignore any errors here
-
-

@@ -6,20 +6,24 @@ def goto_all_pets(chromium_login):
     chromium_login.find_element_by_id('email').send_keys(user_email)
     chromium_login.find_element_by_id('pass').send_keys(user_passwd)
     chromium_login.find_element_by_css_selector('button[type="submit"]').click()
-    return chromium_login
 
 
 # элементы карточек
 def images(chromium_login):
+    # ожидание появления элемента
+    chromium_login.implicitly_wait(10)
     return chromium_login.find_elements_by_css_selector(".card-deck .card-img-top")
 
 
 def names(chromium_login):
+    chromium_login.implicitly_wait(10)
     return chromium_login.find_elements_by_css_selector(".card-deck .card-title")
 
 
 def descriptions(chromium_login):
-    return chromium_login.find_elements_by_css_selector(".card-deck .card-text")
+    chromium_login.implicitly_wait(10)
+    pet_descriptions = chromium_login.find_elements_by_css_selector(".card-deck .card-text")
+    return pet_descriptions
 
 
 def test_show_all_pets(chromium_login):
