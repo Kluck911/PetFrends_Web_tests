@@ -1,14 +1,17 @@
-'''# content of file conftest.py
+# content of file conftest.py
 
 import pytest
 import uuid
 
+from selenium import webdriver
+
 
 @pytest.fixture
 def chrome_options(chrome_options):
+
     chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"
     # chrome_options.add_extension('/path/to/extension.crx')
-    # chrome_options.add_argument('--kiosk')
+    chrome_options.add_argument('--kiosk')
     return chrome_options
 
 
@@ -32,9 +35,10 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture
-def web_browser(request, selenium):
-    browser = selenium
-    browser.set_window_size(800, 600)
+def chromium_login(request):
+    browser = webdriver.Chrome('./chromedriver.exe')
+    browser.set_window_size(1800, 1000)
+    browser.get('http://petfriends.skillfactory.ru/login')
 
     # Return browser instance to test case:
     yield browser
@@ -56,4 +60,6 @@ def web_browser(request, selenium):
                 print(log)
 
         except:
-            pass  # just ignore any errors here'''
+            pass  # just ignore any errors here
+
+
