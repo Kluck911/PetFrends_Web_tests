@@ -1,10 +1,9 @@
-from settings import user_email, user_passwd
-
+from settings import my_user
 
 # логин на https://petfriends.skillfactory.ru/all_pets
 def goto_all_pets(chromium_login):
-    chromium_login.find_element_by_id('email').send_keys(user_email)
-    chromium_login.find_element_by_id('pass').send_keys(user_passwd)
+    chromium_login.find_element_by_id('email').send_keys(my_user.login)
+    chromium_login.find_element_by_id('pass').send_keys(my_user.passwd)
     chromium_login.find_element_by_css_selector('button[type="submit"]').click()
 
 
