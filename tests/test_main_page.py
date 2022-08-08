@@ -10,7 +10,6 @@ class TestsMainPageUI:
         page = MainPage(web_browser, login=my_user.login, passwd=my_user.passwd)
 
         for i in range(len(page.names.get_text())):
-            print(f'dsvvsddv - {len(page.names.get_text())}')
             try:
                 assert page.images[i].get_attribute('src') != ''
             except:
