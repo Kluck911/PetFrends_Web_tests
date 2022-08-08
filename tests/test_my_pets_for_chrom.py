@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 from settings import my_user
 
+
 @pytest.fixture(autouse=True)
 def testing():
     pytest.driver = webdriver.Chrome("chromedriver.exe")

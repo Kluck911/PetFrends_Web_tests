@@ -38,7 +38,6 @@ def chromium_login(request):
     browser = webdriver.Chrome('./chromedriver.exe')
     browser.set_window_size(1024, 768)
     browser.get('http://petfriends.skillfactory.ru/login')
-    myDynamicElement = browser.find_element_by_css_selector('button[type="submit"]')
 
     # Return browser instance to test case:
     yield browser

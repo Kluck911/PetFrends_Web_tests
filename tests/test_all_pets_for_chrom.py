@@ -1,3 +1,5 @@
+import pytest
+
 from settings import my_user
 
 # логин на https://petfriends.skillfactory.ru/all_pets
