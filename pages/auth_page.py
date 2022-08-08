@@ -1,5 +1,5 @@
 from pages.base_page import WebPage
-from pages.locators import WebElement
+from pages.elements import WebElement
 
 
 class AuthPage(WebPage):

@@ -3,24 +3,6 @@
 import pytest
 import uuid
 
-from selenium import webdriver
-
-
-@pytest.fixture
-def chrome_options(chrome_options):
-    chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"
-    # chrome_options.add_extension('/path/to/extension.crx')
-    # chrome_options.add_argument('--kiosk')
-    return chrome_options
-
-
-@pytest.fixture
-def firefox_options(firefox_options):
-    firefox_options.binary = "C:/Program Files/Mozilla Firefox/firefox.exe"
-    firefox_options.add_argument('-foreground')
-    firefox_options.set_preference('browser.anchor_color', '#FF0000')
-    return firefox_options
-
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item, call):
@@ -34,10 +16,10 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture
-def chromium_login(request):
-    browser = webdriver.Chrome('./chromedriver.exe')
-    browser.set_window_size(1024, 768)
-    browser.get('http://petfriends.skillfactory.ru/login')
+def web_browser(request, selenium):
+
+    browser = selenium
+    browser.set_window_size(1900, 1500)
 
     # Return browser instance to test case:
     yield browser
