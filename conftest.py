@@ -1,7 +1,8 @@
-
 import pytest
 import allure
 import uuid
+
+from datetime import datetime
 
 
 @pytest.fixture
@@ -110,3 +111,11 @@ def pytest_collection_finish(session):
                 print(full_name)
 
         pytest.exit('Done!')
+
+
+@pytest.fixture(autouse=True)
+def time_delta():
+    start_time = datetime.now()
+    yield
+    stop_time = datetime.now()
+    print(f'\nТест шел: {stop_time - start_time}')

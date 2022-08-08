@@ -1,18 +1,19 @@
-from settings import skillfactory_user, my_user
 from pages.auth_page import AuthPage
+from settings import my_user
 
 
-def test_authorisation_positive(web_browser):
+class TestsAuthUI:
 
-    page = AuthPage(web_browser)
+    def test_authorisation_positive(self, web_browser, login=my_user.login, passwd=my_user.passwd):
 
-    page.email.send_keys(my_user.login)
+        page = AuthPage(web_browser)
 
-    page.password.send_keys(my_user.passwd)
+        page.email.send_keys(login)
 
-    page.btn.click()
+        page.password.send_keys(passwd)
 
-    page.wait_page_loaded()
+        page.btn.click()
 
-    assert page.get_current_url() == 'https://petfriends.skillfactory.ru/all_pets'
+        page.wait_page_loaded()
 
+        assert page.get_current_url() == 'https://petfriends.skillfactory.ru/all_pets'

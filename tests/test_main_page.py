@@ -1,18 +1,31 @@
-#import time, pickle
-import pytest
 from pages.main_page import MainPage
-from pages.elements import ManyWebElements
-from selenium.webdriver.common.action_chains import ActionChains
+from settings import my_user
 
 
+class TestsMainPageUI:
 
-def test_petfriends(web_browser):
-    """ Authorize to Petfriends via cookies and create a screenshot when loginpage is successfull. """
+    def test_pets_full_description(self, web_browser):
+        # Проверка наличия фото имени и описания питомца а странице https://petfriends.skillfactory.ru/all_pets
 
-    page = MainPage(web_browser)
+        page = MainPage(web_browser, login=my_user.login, passwd=my_user.passwd)
 
-    # Scroll down till the end using actionchains and click on the last image
-    page.scroll_down()
+        for i in range(len(page.names.get_text())):
+            print(f'dsvvsddv - {len(page.names.get_text())}')
+            try:
+                assert page.images[i].get_attribute('src') != ''
+            except:
+                raise Exception(f'Нет фото питомца №{i + 1} ')
 
-    # Make the screenshot of browser window:
-    page._web_driver.save_screenshot('petfriends.png')
+            try:
+                assert page.names[i].text != ''
+            except:
+                raise Exception(f'Нет имени питомца №{i + 1} ')
+
+            try:
+                assert page.descriptions[i].text != ''
+                assert ', ' in page.descriptions[i].text
+                parts = page.descriptions[i].text.split(", ")
+                assert len(parts[0]) > 0
+                assert len(parts[1]) > 0
+            except:
+                raise Exception(f'Нет полного описания питомца №{i + 1} ')
