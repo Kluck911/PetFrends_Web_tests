@@ -1,7 +1,7 @@
 import os
 
 from pages.base_page import WebPage
-from pages.elements import ManyWebElements
+from pages.elements import ManyWebElements, WebElement
 from pages.auth_page import AuthPage
 
 
@@ -27,3 +27,5 @@ class MainPage(WebPage):
     names = ManyWebElements(css_selector=".card-deck .card-title")
 
     descriptions = ManyWebElements(css_selector=".card-deck .card-text")
+
+    my_pets = WebElement(css_selector='#navbarNav > ul > li:nth-child(1)')
