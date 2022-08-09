@@ -12,7 +12,7 @@ class WebElement(object):
     _locator = ('', '')
     _web_driver = None
     _page = None
-    _timeout = 9
+    _timeout = 10
     _wait_after_click = False  # TODO: how we can wait after click?
 
     def __init__(self, timeout=10, wait_after_click=False, **kwargs):

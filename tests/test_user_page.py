@@ -14,7 +14,7 @@ class TestsUserPageUI:
 
     def test_compare_quantity_of_pets(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
-        # Присутствуют все питомцы.
+        # Проверяем что присутствуют все питомцы.
         # сравниваем кол-во питомцев в счетчике с кол-вом строк в таблице
 
         page = UserPage(web_browser, login=login, passwrd=passwrd)
@@ -27,7 +27,7 @@ class TestsUserPageUI:
 
     def test_foto_more_than_half(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
-        # Хотя бы у половины питомцев есть фото.
+        # Проверяем что хотя бы у половины питомцев есть фото.
         # сравниваем кол-во пустых слотов под фото с кол-вом слотов с картинками
 
         page = UserPage(web_browser, login=login, passwrd=passwrd)
