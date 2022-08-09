@@ -16,9 +16,6 @@ class UserPage(WebPage):
 
         page.my_pets.click()
 
-
-
-
     elements_of_names = ManyWebElements(xpath="//*[@id='all_my_pets']//td[1]")
 
     elements_of_breeds = ManyWebElements(xpath="//*[@id='all_my_pets']//td[2]")
@@ -28,5 +25,3 @@ class UserPage(WebPage):
     elements_of_pics = ManyWebElements(xpath="//tbody/tr/th/img")
 
     user_info_element = WebElement(xpath="//div[@class='.col-sm-4 left']")
-
-

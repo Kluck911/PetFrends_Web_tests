@@ -13,3 +13,5 @@ class AuthPage(WebPage):
     password = WebElement(id='pass')
 
     btn = WebElement(class_name='btn.btn-success')
+
+    allert = WebElement(css_selector=".h1")

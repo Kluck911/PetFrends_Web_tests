@@ -21,9 +21,6 @@ class MainPage(WebPage):
 
         page.btn.click()
 
-
-
-
     # некоторые элементы страницы
     images = ManyWebElements(css_selector=".card-deck .card-img-top")
 

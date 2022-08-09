@@ -1,9 +1,14 @@
+import pytest
+
 from pages.main_page import MainPage
-from settings import my_user, invalid_user
+from settings import my_user
 
 
 class TestsMainPageUI:
 
+    @pytest.mark.main
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_pets_full_description(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
         # Проверка наличия фото имени и описания питомца а странице https://petfriends.skillfactory.ru/all_pets
 

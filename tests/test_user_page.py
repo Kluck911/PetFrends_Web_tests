@@ -1,10 +1,17 @@
+import pytest
+
 from pages.user_page import UserPage
 from settings import my_user
 
 
 class TestsUserPageUI:
 
+    @pytest.mark.user
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_page_is_my_pets(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
+
+        # проверяем что полученная страница сооответствует странице питомцев пользователя
 
         page = UserPage(web_browser, login=login, passwrd=passwrd)
 
@@ -12,6 +19,9 @@ class TestsUserPageUI:
 
         assert page.get_current_url() == 'https://petfriends.skillfactory.ru/my_pets'
 
+    @pytest.mark.user
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_compare_quantity_of_pets(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
         # Проверяем что присутствуют все питомцы.
@@ -25,6 +35,9 @@ class TestsUserPageUI:
 
         assert len(page.elements_of_names.get_text()) == int(amount_of_pets[0])
 
+    @pytest.mark.user
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_foto_more_than_half(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
         # Проверяем что хотя бы у половины питомцев есть фото.
@@ -42,6 +55,9 @@ class TestsUserPageUI:
 
         assert amount_of_pic >= empty_slots
 
+    @pytest.mark.user
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_all_pets_with_full_description(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
         page = UserPage(web_browser, login=login, passwrd=passwrd)
@@ -54,6 +70,9 @@ class TestsUserPageUI:
             assert page.elements_of_breeds.get_text()[i] != ''
             assert page.elements_of_ages.get_text()[i] != '' and page.elements_of_ages.get_text()[i].isdigit()
 
+    @pytest.mark.user
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_pets_have_different_names(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
         # У всех питомцев разные имена.
@@ -69,6 +88,9 @@ class TestsUserPageUI:
         else:
             assert same_names == []
 
+    @pytest.mark.user
+    @pytest.mark.pos
+    @pytest.mark.all_tests
     def test_some_pets_is_same(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
         # В списке нет повторяющихся питомцев. Питомцы различаются Имя, парода, возраст всех питомцев
