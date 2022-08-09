@@ -6,7 +6,8 @@ Test suite was created within the educational project and uses Selenium Web driv
 
 # How To Run Tests
 
-1. Try to download a web driver for you browser from official page: 
+1.  Try to download a web driver for your browser from official page: 
+
     https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/
 
 3. Move the driver to "tests" folder in project
@@ -16,16 +17,16 @@ Test suite was created within the educational project and uses Selenium Web driv
   - for Mozila Firefox: py.test -v --driver Firefox --driver-path geckodriver.exe  -m 'all_test'
   - for Google Chrome: py.test -v --driver Chrome --driver-path chromedriver.exe  -m 'all_test'
 
-Note: You must use your path to webdriver if don't move driver to tests folder. You can use different marks for run some tests suits:
+Note: You must use your path to webdriver if don't move driver to tests folder. You can use different marks to run some tests suits:
 
-      -  auth: tests for autentification page: https://petfriends.skillfactory.ru/login
-      -  main: tests for main page: https://petfriends.skillfactory.ru/all_pets
-      -  user: tests for "My Pets" page https://petfriends.skillfactory.ru/my_pets
+      -  auth: tests for the autentification page: https://petfriends.skillfactory.ru/login
+      -  main: tests for the main page: https://petfriends.skillfactory.ru/all_pets
+      -  user: tests for the page "My Pets": https://petfriends.skillfactory.ru/my_pets
       -  neg: all negative tests
       -  pos: all positive tests
-      -  all_tests: run all tests from "test" folder
+      -  all_tests: run all tests from the "test" folder
       
-     For examle: 
+     For example: 
       py.test -v --driver Firefox --driver-path geckodriver.exe  -m 'auth'
       
       py.test -v --driver Chrome --driver-path chromedriver.exe  -m 'user'
