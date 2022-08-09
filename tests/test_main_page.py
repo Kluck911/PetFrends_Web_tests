@@ -1,13 +1,13 @@
 from pages.main_page import MainPage
-from settings import my_user
+from settings import my_user, invalid_user
 
 
 class TestsMainPageUI:
 
-    def test_pets_full_description(self, web_browser):
+    def test_pets_full_description(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
         # Проверка наличия фото имени и описания питомца а странице https://petfriends.skillfactory.ru/all_pets
 
-        page = MainPage(web_browser, login=my_user.login, passwd=my_user.passwd)
+        page = MainPage(web_browser, login=login, passwrd=passwrd)
 
         for i in range(len(page.names.get_text())):
             try:

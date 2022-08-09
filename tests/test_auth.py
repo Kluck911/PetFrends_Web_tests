@@ -4,13 +4,13 @@ from settings import my_user
 
 class TestsAuthUI:
 
-    def test_authorisation_positive(self, web_browser, login=my_user.login, passwd=my_user.passwd):
+    def test_authorisation_positive(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
 
         page = AuthPage(web_browser)
 
         page.email.send_keys(login)
 
-        page.password.send_keys(passwd)
+        page.password.send_keys(passwrd)
 
         page.btn.click()
 

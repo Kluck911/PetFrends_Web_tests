@@ -4,7 +4,7 @@ from pages.elements import WebElement
 
 class AuthPage(WebPage):
 
-    def __init__(self, web_driver, url=''):
+    def __init__(self, web_driver):
         url = 'https://petfriends.skillfactory.ru/login'
         super().__init__(web_driver, url)
 
