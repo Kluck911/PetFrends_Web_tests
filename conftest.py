@@ -2,6 +2,8 @@ import pytest
 import allure
 import uuid
 
+from datetime import datetime
+
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item, call):
