@@ -4,9 +4,9 @@ from pages.main_page import MainPage
 from settings import my_user
 
 
+@pytest.mark.main
 class TestsMainPageUI:
 
-    @pytest.mark.main
     @pytest.mark.pos
     @pytest.mark.all_tests
     def test_pets_full_description(self, web_browser, login=my_user.login, passwrd=my_user.passwrd):
