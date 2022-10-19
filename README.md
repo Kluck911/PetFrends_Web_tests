@@ -14,7 +14,7 @@ Test suite was created within the educational project and uses Selenium Web driv
 
 5. You can run all test from tests folder uses the next commands:
 
-  - for Mozila Firefox: py.test -v --driver Firefox --driver-path geckodriver.exe  -m 'all_test'
+  - for Mozilla Firefox: py.test -v --driver Firefox --driver-path geckodriver.exe  -m 'all_test'
   - for Google Chrome: py.test -v --driver Chrome --driver-path chromedriver.exe  -m 'all_test'
 
 Note: You must use your path to webdriver if don't move driver to tests folder. You can use different marks to run some tests suits:
