@@ -1,6 +1,6 @@
 # Introduction
 
-This folder contains UI tests for https://petfriends.skillfactory.ru/login
+This folder contains UI tests for https://petfriends.skillfactory.ru/
 
 Test suite was created within the educational project and uses Selenium Web driver.
 
